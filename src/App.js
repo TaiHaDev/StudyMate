@@ -10,7 +10,9 @@ import backgroundIcon from './asset/image/background.png'
 import quoteIcon from './asset/image/quote.png'
 import PomodoroTimer from './component/PomodoroTimer';
 import TodoList from './component/TodoList';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import BottomBar from './component/BottomBar';
+import Background from './component/Background';
 const expandOnClickHandler = event => {
 
   const root = document.getElementById('root');
@@ -22,8 +24,11 @@ const expandOnClickHandler = event => {
 };
 
 function App() {
+  const [videoLoading, setVideoLoading] = useState(true);
+  const [videoUrl, setVideoUrl] = useState("https://cdn.pixabay.com/vimeo/420224623/cat-39009.mp4?width=1920&hash=15602f40f2d7c0012e6897336f7bdf831d0cb576");
   const timerRef = useRef();
   const todoRef = useRef();
+  const backgroundRef= useRef();
   const {isTimerClicked, setIsTimerClicked} = useState(true);
   const onToggleHandler = ref => {
     if (ref.current.classList.contains("hidden")) {
@@ -32,25 +37,33 @@ function App() {
       ref.current.classList.add("hidden");
     }
   }
+  const changeVideoHandler = (link) => {
+    setVideoUrl(link)
+  }
+  const onVideoLoaded = () => {
+    setVideoLoading(false);
+  };
+
   return (
     <div className="App">
-      <video autoPlay loop muted className='absolute -z-10 top-0 left-0 h-full w-full object-cover'>
-        <source src={video}/>
+      {videoLoading && (<div className='absolute -z-10 top-0 left-0 h-full w-full bg-slate-700 flex items-center justify-center'><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-200"></div></div>)}
+       <video onLoadedData={onVideoLoaded} key={videoUrl} autoPlay loop muted className='absolute -z-10 top-0 left-0 h-full w-full object-cover'>
+        <source src={videoUrl} type="video/mp4"/>
         This video is no longer exist
       </video>
-      <div className='absolute bottom-10 right-5'>
-       <Button iconSrc={chatBotIcon} description="Chatbot"/>
+      <div className='absolute bottom-5 right-5'>
+       <Button iconSrc={chatBotIcon} description="Chatbot" isTop={true}/>
       </div>
-      <div className='absolute top-5 right-5 flex space-x-6'>
+      <div className='absolute top-5 right-5 flex space-x-5'>
+        <Button iconSrc={reportIcon} description="Analysis"/>
+        <Button iconSrc={quoteIcon} description="Daily&nbsp;Quotes"/>
         <Button iconSrc={flashCardIcon} description="Flashcard"/>
         <Button iconSrc={todolistIcon} description="Todo&nbsp;Lists" onClickHandler={() => onToggleHandler(todoRef)}/>
         <Button  iconSrc={timerIcon} description="Timer" onClickHandler={() => onToggleHandler(timerRef)}/>
         <Button iconSrc={expandIcon} description="Expand" onClickHandler={expandOnClickHandler}/>
       </div>
-      <div className='absolute top-1/2 -translate-y-1/2 left-6 flex flex-col space-y-7'>
-        <Button iconSrc={backgroundIcon} description="Background"/>
-        <Button iconSrc={reportIcon} description="Analysis"/>
-        <Button iconSrc={quoteIcon} description="Daily&nbsp;Quotes"/>
+      <div className='absolute bottom-5 left-1/2 -translate-x-1/2'>
+        <BottomBar onRemoveBackgroundHandler={() => onToggleHandler(backgroundRef)}   />
       </div>
       <div ref={timerRef}>
         <PomodoroTimer onRemoveHandler={() => onToggleHandler(timerRef)}/>
@@ -58,6 +71,10 @@ function App() {
       <div ref={todoRef}>
         <TodoList onRemoveHandler={() => onToggleHandler(todoRef)}/>
       </div>
+      <div ref={backgroundRef}>
+        <Background onRemoveHandler={() => onToggleHandler(backgroundRef)} changeVideoUrl={changeVideoHandler} resetVideoLoading={setVideoLoading} />
+      </div>
+      
     </div>
   );
 }

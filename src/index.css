@@ -25,6 +25,21 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.spin-slow {
+    animation: spin 10s linear infinite;
+}
+
+
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
