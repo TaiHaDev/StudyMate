@@ -13,6 +13,8 @@ import TodoList from './component/TodoList';
 import { useEffect, useRef, useState } from 'react';
 import BottomBar from './component/BottomBar';
 import Background from './component/Background';
+import Music from './component/Music';
+import Quote from './component/Quote';
 const expandOnClickHandler = event => {
 
   const root = document.getElementById('root');
@@ -25,9 +27,10 @@ const expandOnClickHandler = event => {
 
 function App() {
   const [videoLoading, setVideoLoading] = useState(true);
-  const [videoUrl, setVideoUrl] = useState("https://cdn.pixabay.com/vimeo/420224623/cat-39009.mp4?width=1920&hash=15602f40f2d7c0012e6897336f7bdf831d0cb576");
+  const [videoUrl, setVideoUrl] = useState("https://cdn.pixabay.com/vimeo/312432035/pet-20830.mp4?width=1920&hash=0f60ccc6c08d9864f751809addc7245992cc8284");
   const timerRef = useRef();
   const todoRef = useRef();
+  const quoteRef = useRef();
   const backgroundRef= useRef();
   const {isTimerClicked, setIsTimerClicked} = useState(true);
   const onToggleHandler = ref => {
@@ -56,7 +59,7 @@ function App() {
       </div>
       <div className='absolute top-5 right-5 flex space-x-5'>
         <Button iconSrc={reportIcon} description="Analysis"/>
-        <Button iconSrc={quoteIcon} description="Daily&nbsp;Quotes"/>
+        <Button iconSrc={quoteIcon} description="Daily&nbsp;Quotes" onClickHandler={() => onToggleHandler(quoteRef)}/>
         <Button iconSrc={flashCardIcon} description="Flashcard"/>
         <Button iconSrc={todolistIcon} description="Todo&nbsp;Lists" onClickHandler={() => onToggleHandler(todoRef)}/>
         <Button  iconSrc={timerIcon} description="Timer" onClickHandler={() => onToggleHandler(timerRef)}/>
@@ -64,6 +67,7 @@ function App() {
       </div>
       <div className='absolute bottom-5 left-1/2 -translate-x-1/2'>
         <BottomBar onRemoveBackgroundHandler={() => onToggleHandler(backgroundRef)}   />
+        
       </div>
       <div ref={timerRef}>
         <PomodoroTimer onRemoveHandler={() => onToggleHandler(timerRef)}/>
@@ -73,6 +77,9 @@ function App() {
       </div>
       <div ref={backgroundRef}>
         <Background onRemoveHandler={() => onToggleHandler(backgroundRef)} changeVideoUrl={changeVideoHandler} resetVideoLoading={setVideoLoading} />
+      </div>
+      <div ref={quoteRef} className='absolute top-[39rem] right-5'>
+        <Quote onRemoveHandler={() => onToggleHandler(quoteRef)} />
       </div>
       
     </div>

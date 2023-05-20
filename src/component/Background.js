@@ -6,7 +6,7 @@ import coffee from "../asset/image/coffee.png";
 import animal from "../asset/image/animal.png";
 import displayLink from "./DummyImageObject.js"
 const Background = ({onRemoveHandler, changeVideoUrl, resetVideoLoading}) => {
-  const [selectedButton, setSelectedButton] = useState("nature");
+  const [selectedButton, setSelectedButton] = useState("animal");
 
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
@@ -32,14 +32,14 @@ const Background = ({onRemoveHandler, changeVideoUrl, resetVideoLoading}) => {
         </svg>
       </div>
       <div className="flex flex-wrap gap-2">
-        <div
+      <div
           className={`relative p-2 ${
-            selectedButton === "nature" ? "bg-slate-600" : "bg-slate-800 hover:bg-slate-600"
+            selectedButton === "animal" ? "bg-slate-600" : "bg-slate-800 hover:bg-slate-600"
           } rounded-md border border-slate-600 mt-4`}
-          onClick={() => handleButtonClick("nature")}
+          onClick={() => handleButtonClick("animal")}
         >
-          <img src={nature} className="w-8 h-8" alt="icon" />
-          <p className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-sm">Nature</p>
+          <img src={animal} className="w-8 h-8" alt="icon" />
+          <p className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-sm">Animal</p>
         </div>
         <div
           className={`relative p-2 ${
@@ -68,16 +68,16 @@ const Background = ({onRemoveHandler, changeVideoUrl, resetVideoLoading}) => {
           <img src={coffee} className="w-8 h-8" alt="icon" />
           <p className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-sm">Coffee</p>
         </div>
+
         <div
           className={`relative p-2 ${
-            selectedButton === "animal" ? "bg-slate-600" : "bg-slate-800 hover:bg-slate-600"
+            selectedButton === "nature" ? "bg-slate-600" : "bg-slate-800 hover:bg-slate-600"
           } rounded-md border border-slate-600 mt-4`}
-          onClick={() => handleButtonClick("animal")}
+          onClick={() => handleButtonClick("nature")}
         >
-          <img src={animal} className="w-8 h-8" alt="icon" />
-          <p className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-sm">Animal</p>
+          <img src={nature} className="w-8 h-8" alt="icon" />
+          <p className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-sm">Nature</p>
         </div>
-
         
     
       </div>

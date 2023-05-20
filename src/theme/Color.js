@@ -1,0 +1,1 @@
+const themeColor = {background: "bg-slate-800", text: "bg-slate-200"};

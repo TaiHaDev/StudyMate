@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import Music from "./Music";
+import Volume from "./Volume";
 
 const BottomBar = ({onRemoveBackgroundHandler}) => {
+    const [musicThumbnail, setMusicThumbnail] = useState("https://i.ytimg.com/vi/JxJVQvuVlnU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCKwkBIDkwqQtdnJ1yVCFB5FPYeag");
+    const [isVolumeHovered, setIsVolumeHovered] = useState(false);
+    const [isMusicOpened, setIsMusicOpened] = useState(false);
+    const handleMouseEnter = () => {
+        setIsVolumeHovered(true);
+      };
+    
+      const handleMouseLeave = () => {
+        setIsVolumeHovered(false);
+      };
+      const onClickMusicHandler = () => {
+        setIsMusicOpened(prev => !prev);
+      }
+      const closeMusicHandler = () => {
+        setIsMusicOpened(false);
+      }
+
+    const volumeClassName = isVolumeHovered ? "" : "hidden";
   return (
-    <div className="inline-flex space-x-4 rounded-full bg-slate-200 px-2 py-1">
+    <div className="inline-flex space-x-4 rounded-full bg-slate-200 px-2 py-1 shadow-lg">
       <div className="hover:bg-slate-600  rounded-full">
-        <img src="https://i.ytimg.com/vi/JxJVQvuVlnU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCKwkBIDkwqQtdnJ1yVCFB5FPYeag" alt="music thumbnail" className="w-8 h-8 object-cover rounded-full spin-slow" />
+        {isMusicOpened && (<Music setMusicThumbnail={setMusicThumbnail} onCloseMusic={closeMusicHandler} />)}
+        <img src={musicThumbnail} alt="music thumbnail" className="w-8 h-8 object-cover rounded-full spin-slow object-center" onClick={onClickMusicHandler} />
       </div>
-      <div className="hover:bg-slate-600 px-2 py-1 rounded-full">
+      <div className="relative hover:bg-slate-600 px-2 py-1 rounded-full" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+        <div className={volumeClassName}>
+            <Volume/>
+        </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
