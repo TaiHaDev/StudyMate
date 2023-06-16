@@ -27,11 +27,17 @@ const expandOnClickHandler = event => {
 
 function App() {
   const [videoLoading, setVideoLoading] = useState(true);
-  const [videoUrl, setVideoUrl] = useState("https://cdn.pixabay.com/vimeo/312432035/pet-20830.mp4?width=1920&hash=0f60ccc6c08d9864f751809addc7245992cc8284");
+  const [videoUrl, setVideoUrl] = useState(    {
+    "id": 2,
+    "url": "https://cdn.pixabay.com/vimeo/312432035/pet-20830.mp4?width=1920&hash=0f60ccc6c08d9864f751809addc7245992cc8284",
+    "name": "cat sleeping",
+    "theme": "animal"
+});
   const {isTimerClicked, setIsTimerClicked} = useState(true);
   const timerRef = useRef();
   const todoRef = useRef();
   const quoteRef = useRef();
+  const videoRef = useRef();
   const backgroundRef= useRef();
 
   const onToggleHandler = ref => {
@@ -51,8 +57,8 @@ function App() {
   return (
     <div className="App">
       {videoLoading && (<div className='absolute -z-10 top-0 left-0 h-full w-full bg-slate-700 flex items-center justify-center'><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-200"></div></div>)}
-       <video onLoadedData={onVideoLoaded} key={videoUrl} autoPlay loop muted className='absolute -z-10 top-0 left-0 h-full w-full object-cover'>
-        <source src={videoUrl} type="video/mp4"/>
+       <video ref={videoRef} onLoadedData={onVideoLoaded} key={videoUrl.id} autoPlay loop muted className='absolute -z-10 top-0 left-0 h-full w-full object-cover'>
+        <source src={videoUrl.url} type="video/mp4"/>
         This video is no longer exist
       </video>
       <div className='absolute bottom-5 right-5'>
@@ -77,7 +83,7 @@ function App() {
         <TodoList onRemoveHandler={() => onToggleHandler(todoRef)}/>
       </div>
       <div ref={backgroundRef}>
-        <Background onRemoveHandler={() => onToggleHandler(backgroundRef)} changeVideoUrl={changeVideoHandler} resetVideoLoading={setVideoLoading} />
+        <Background videoUrl={videoUrl} videoRef={videoRef} onRemoveHandler={() => onToggleHandler(backgroundRef)} changeVideoUrl={changeVideoHandler} resetVideoLoading={setVideoLoading} />
       </div>
       <div ref={quoteRef} className='absolute top-[39rem] right-5'>
         <Quote onRemoveHandler={() => onToggleHandler(quoteRef)} />
