@@ -98,9 +98,9 @@ const Background = ({onRemoveHandler, changeVideoUrl, resetVideoLoading}) => {
       </div>
       <div className="flex flex-wrap gap-2 mt-8">
       {displayLink[selectedButton] &&
-displayLink[selectedButton].map(links => (
-    <div className="w-[5.65rem] h-[5.65rem] rounded-lg" onClick={() => onChangeImageHandler(links.videoLink)}>
-        <img src={links.pictureLink} alt="background preview" className="rounded-md"/>
+displayLink[selectedButton].map((links, index) => (
+    <div key={index} className="w-[5.65rem] h-[5.65rem] rounded-lg" onClick={() => onChangeImageHandler(links.url)}>
+        <img src={links.pictureURL} alt="background preview" className="rounded-md"/>
     </div>
 ))
 }
