@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import nature from "../asset/image/nature.png";
 import anime from "../asset/image/anime.png";
 import city from "../asset/image/city.png";
 import coffee from "../asset/image/coffee.png";
 import animal from "../asset/image/animal.png";
-import displayLink from "./DummyImageObject.js"
-const Background = ({onRemoveHandler, changeVideoUrl, resetVideoLoading}) => {
-  const [selectedButton, setSelectedButton] = useState("animal");
+import { getRequest } from "../api/Request";
 
+const Background = ({onRemoveHandler, changeVideoUrl, resetVideoLoading}) => {
+  const [displayLink, setDisplayLink] = useState({});
+  const [selectedButton, setSelectedButton] = useState("animal");
+  useEffect(() => {
+    const updateDisplayLink = async () => {
+      if (!displayLink[selectedButton]) {
+        const backgroundList = await getRequest("background/" +  selectedButton);
+        console.log(backgroundList);
+        setDisplayLink(prev => {
+          const copy = {...prev};
+          copy[selectedButton] = backgroundList;
+          return copy;
+        })
+      }
+    }
+    updateDisplayLink();
+  }, [selectedButton])
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
   };
@@ -82,7 +97,7 @@ const Background = ({onRemoveHandler, changeVideoUrl, resetVideoLoading}) => {
     
       </div>
       <div className="flex flex-wrap gap-2 mt-8">
-      {
+      {displayLink[selectedButton] &&
 displayLink[selectedButton].map(links => (
     <div className="w-[5.65rem] h-[5.65rem] rounded-lg" onClick={() => onChangeImageHandler(links.videoLink)}>
         <img src={links.pictureLink} alt="background preview" className="rounded-md"/>

@@ -43,7 +43,7 @@ const Quote = ({onRemoveHandler}) => {
             author: "Albert Schweitzer"
         }
     ];
-    const randomQuoteNumber = Math.ceil(Math.random() * motivationalQuotes.length);
+    const randomQuoteNumber = Math.floor(Math.random() * motivationalQuotes.length);
   return (
     <div className='w-[24.25rem]'>
         <div className='flex justify-between items-center my-2'>

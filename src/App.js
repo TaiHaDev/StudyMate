@@ -28,11 +28,12 @@ const expandOnClickHandler = event => {
 function App() {
   const [videoLoading, setVideoLoading] = useState(true);
   const [videoUrl, setVideoUrl] = useState("https://cdn.pixabay.com/vimeo/312432035/pet-20830.mp4?width=1920&hash=0f60ccc6c08d9864f751809addc7245992cc8284");
+  const {isTimerClicked, setIsTimerClicked} = useState(true);
   const timerRef = useRef();
   const todoRef = useRef();
   const quoteRef = useRef();
   const backgroundRef= useRef();
-  const {isTimerClicked, setIsTimerClicked} = useState(true);
+
   const onToggleHandler = ref => {
     if (ref.current.classList.contains("hidden")) {
       ref.current.classList.remove("hidden");
