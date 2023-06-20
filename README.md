@@ -1,4 +1,4 @@
-#### StudyMate front-end codebase
+# StudyMate front-end codebase
 *Short description:* chill and study with our modern study space.
 
 ## Prerequisites
