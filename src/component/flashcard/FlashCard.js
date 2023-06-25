@@ -39,13 +39,27 @@ const dummyFlashCardSet = [
       "Principles of operating systems, process management, memory management, and file systems",
   },
 ];
-const FlashCard = () => {
+const FlashCard = ({onRemoveHandler}) => {
   const [chosenSetId, setChosenSetId] = useState();
+
+  const onChooseFlashcardSetHandler = (id) => {
+    setChosenSetId(id);
+  }
+  const onChooseCardSetAgain = () => {
+    setChosenSetId(null);
+  }
 
   return (
     <div className="w-[40rem] h-[30rem]  2xl:w-[60rem] xl:h-[40rem] rounded-md py-6 px-12 bg-slate-800 text-white">
       <div className="flex justify-between items-center border-b-2 border-slate-800 pb-1">
+        <div className="flex space-x-4 items-center">
+        {chosenSetId && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 hover:bg-white hover:text-black rounded-full p-1" onClick={onChooseCardSetAgain}>
+  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+</svg>}
+
         <p className="font-medium">Flashcards</p>
+
+        </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -53,6 +67,7 @@ const FlashCard = () => {
           strokeWidth={1.5}
           stroke="currentColor"
           className="w-8 h-8 hover:bg-slate-500 hover:rounded-full p-1"
+          onClick={onRemoveHandler}
         >
           <path
             strokeLinecap="round"
@@ -64,7 +79,7 @@ const FlashCard = () => {
       {!chosenSetId ? (
         <div className="mt-4 flex flex-wrap gap-3 items-center 2xl:gap-5">
           {dummyFlashCardSet.map((set) => (
-            <FlashCardSet set={set} />
+            <FlashCardSet set={set} setChosenHandler={onChooseFlashcardSetHandler} />
           ))}
         </div>
       ) : (

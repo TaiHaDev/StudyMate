@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Quote = ({onRemoveHandler}) => {
     const motivationalQuotes = [
@@ -44,6 +44,7 @@ const Quote = ({onRemoveHandler}) => {
         }
     ];
     const randomQuoteNumber = Math.floor(Math.random() * motivationalQuotes.length);
+    const [quote, setQuote] = useState(motivationalQuotes[randomQuoteNumber]);
   return (
     <div className='w-[24.25rem]'>
         <div className='flex justify-between items-center my-2'>
@@ -60,8 +61,8 @@ const Quote = ({onRemoveHandler}) => {
 
 
         </div>
-        <p className='text-white text-lg font-medium'>"{motivationalQuotes[randomQuoteNumber].quote}"</p>
-        <p className='text-white text-end'>{motivationalQuotes[randomQuoteNumber].author}</p>
+        <p className='text-white text-lg font-medium'>"{quote.quote}"</p>
+        <p className='text-white text-end'>{quote.author}</p>
 
     </div>
   )
