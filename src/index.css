@@ -47,35 +47,74 @@ input[type=number] {
 
 
 
-.flip-card {
-  perspective: 1000px;
-}
 
-.flip-card-inner {
+.flip-card-inner-set {
   position: relative;
-  width: 100%;
-  height: 100%;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.flip-card:hover .flip-card-inner {
+.flip-card-set:hover .flip-card-inner-set {
   transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front-set, .flip-card-back-set {
+
   position: absolute;
   width: 100%;
-  height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 
 
-.flip-card-back {
-  color: white;
+.flip-card-back-set {
   transform: rotateY(180deg);
+}
+
+
+.card {
+
+  perspective: 1000px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-inner {
+  width: 80%;
+  height: 80%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+
+
+}
+
+.card.flipped .card-inner {
+  transform: rotateX(180deg);
+}
+
+.card-front,
+.card-back {
+  padding: 0px 2rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateX(180deg);
 }
