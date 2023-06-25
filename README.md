@@ -1,5 +1,5 @@
-#### StudyMate front-end codebase
-*Short description:* chill and study with our modern study space.
+# StudyMate front-end codebase
+chill and study with our modern study space.
 
 ## Prerequisites
 
