@@ -5,10 +5,22 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        flipIn: {
+          '0%': { transform: 'rotateY(0deg)' },
+          '100%': { transform: 'rotateY(180deg)' },
+        },
+        flipOut: {
+          '0%': { transform: 'rotateY(180deg)' },
+          '100%': { transform: 'rotateY(360deg)' },
+        },
+      },
       animation: {
-        'spin-slow': 'spin 3s linear infinite',
-      }
-    }
+        flipIn: 'flipIn 0.5s forwards',
+        flipOut: 'flipOut 0.5s forwards',
+      },
+    },
   },
+  variants: {},
   plugins: [],
 }
