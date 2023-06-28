@@ -159,7 +159,7 @@ header {
 .input-box {
     position: relative;
     width: 100%;
-    height: auto;
+    height: 100%;
     border-bottom: 2px solid whitesmoke;
     margin: 30px 0;
 }
@@ -296,7 +296,7 @@ header {
 .social-icons {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-evenly;
     /* padding-bottom: 1px; */
 }
 
