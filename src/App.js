@@ -5,7 +5,7 @@ import timerIcon from "./asset/image/chronometer.png";
 import expandIcon from "./asset/image/expand.png";
 import flashCardIcon from "./asset/image/flash-cards.png";
 import todolistIcon from "./asset/image/to-do-list.png";
-import reportIcon from "./asset/image/report.png";
+import moreIcon from "./asset/image/more.png";
 import backgroundIcon from "./asset/image/background.png";
 import quoteIcon from "./asset/image/quote.png";
 import PomodoroTimer from "./component/PomodoroTimer";
@@ -16,6 +16,7 @@ import Background from "./component/Background";
 import Music from "./component/Music";
 import Quote from "./component/Quote";
 import FlashCard from "./component/flashcard/FlashCard";
+import UserDropDown from "./component/UserDropDown";
 const expandOnClickHandler = (event) => {
   const root = document.getElementById("root");
   if (document.fullscreenElement) {
@@ -39,6 +40,7 @@ function App() {
   const quoteRef = useRef();
   const videoRef = useRef();
   const backgroundRef = useRef();
+  const dropDownRef = useRef();
   const [isFlashcardLoaded, setIsFlashcardloaded] = useState(false);
   const onToggleHandler = (ref) => {
     if (ref.current.classList.contains("hidden")) {
@@ -80,12 +82,12 @@ function App() {
         <Button iconSrc={chatBotIcon} description="Chatbot" isTop={true} />
       </div>
       <div className="absolute top-5 right-5 flex space-x-5 opacity-80">
-        <Button iconSrc={reportIcon} description="Analysis" />
         <Button
           iconSrc={quoteIcon}
           description="Daily&nbsp;Quotes"
           onClickHandler={() => onToggleHandler(quoteRef)}
         />
+
         <Button
           iconSrc={flashCardIcon}
           description="Flashcard"
@@ -106,13 +108,20 @@ function App() {
           description="Expand"
           onClickHandler={expandOnClickHandler}
         />
+        <div className="relative ">
+          <Button  iconSrc={moreIcon} description="More" onClickHandler={() => onToggleHandler(dropDownRef)}/>
+
+          <div ref={dropDownRef} className="absolute top-14 right-0 hidden" >
+            <UserDropDown/>
+          </div>
+        </div>
       </div>
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 opacity-80">
         <BottomBar
           onRemoveBackgroundHandler={() => onToggleHandler(backgroundRef)}
         />
       </div>
-      <div ref={timerRef} className="opacity-80">
+      <div ref={timerRef} className="opacity-80 absolute top-24 right-5 -z-10"  >
         <PomodoroTimer onRemoveHandler={() => onToggleHandler(timerRef)} />
       </div>
       <div ref={todoRef} className="opacity-80">

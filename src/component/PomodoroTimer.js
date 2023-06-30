@@ -121,7 +121,7 @@ const PomodoroTimer = ({onRemoveHandler}) => {
   }
   const [initialMin, initialSecond] = convertTime(chosenType[0]);
   return (
-    <div className="bg-slate-200 h-40 w-[24.25rem] rounded-lg px-5 py-2 flex flex-col justify-between absolute top-24 right-5">
+    <div className="bg-slate-200 h-40 w-[24.25rem] rounded-lg px-5 py-2 flex flex-col justify-between ">
         <div className='flex justify-between items-center border-b-2 border-slate-700 pb-1'>
         <p className='font-medium'>Sounds</p>
         <div className='flex space-x-2'>
