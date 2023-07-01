@@ -14,7 +14,6 @@ const Button = ({iconSrc, description, onClickHandler, isTop}) => {
     <div   onMouseEnter={onHoverHandler} onMouseLeave={onLeaveHandler} onClick={onClickHandler}>
       <div className=' h-12 w-12 p-2.5 bg-slate-100 rounded-lg hover:bg-slate-400 '>
         <img src={iconSrc} alt="icon" />
-        
       </div>
       <p ref={descriptionRef} className={positionClass}>{description}</p>
     </div>
