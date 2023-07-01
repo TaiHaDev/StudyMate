@@ -1,6 +1,10 @@
 import React, { useRef } from 'react'
 import './loginPage.css'
 import backgroundImage from '../../asset/image/background.jpg'
+import facebookImage from '../../asset/image/facebook.png'
+import githubImage from '../../asset/image/github.png'
+import googleImage from '../../asset/image/google.png'
+import instagramImage from '../../asset/image/instagram.png'
 
 const LoginPage = () => {
     const wrapperRef = useRef();
@@ -75,9 +79,9 @@ const LoginPage = () => {
 
                 <div className="social_login">
                      <div className="social-icons">
-                        <div className="icon-facebook"><img src="images/facebook.png" alt="" width="40" height="40"/></div>
-                        <div className="icon-google"><img src="images/google.png" alt="" width="40" height="40"/></div>
-                        <div className="icon-instagram"><img src="images/instagram.png" alt="" width="40" height="40"/></div>
+                        <div className="icon-facebook"><img src={facebookImage} alt="" width="40" height="40"/></div>
+                        <div className="icon-google"><img src={googleImage} alt="" width="40" height="40"/></div>
+                        <div className="icon-instagram"><img src={instagramImage} alt="" width="40" height="40"/></div>
                     </div>
                 </div>
 

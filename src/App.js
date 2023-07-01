@@ -13,7 +13,6 @@ import TodoList from "./component/TodoList";
 import { useEffect, useRef, useState } from "react";
 import BottomBar from "./component/BottomBar";
 import Background from "./component/Background";
-import Music from "./component/Music";
 import Quote from "./component/Quote";
 import FlashCard from "./component/flashcard/FlashCard";
 import UserDropDown from "./component/UserDropDown";
@@ -108,8 +107,9 @@ function App() {
           description="Expand"
           onClickHandler={expandOnClickHandler}
         />
+
         <div className="relative ">
-          <Button  iconSrc={moreIcon} description="More" onClickHandler={() => onToggleHandler(dropDownRef)}/>
+        <Button  iconSrc={moreIcon} description="More" onClickHandler={() => onToggleHandler(dropDownRef)}/>
 
           <div ref={dropDownRef} className="absolute top-14 right-0 hidden" >
             <UserDropDown/>

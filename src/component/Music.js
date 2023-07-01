@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 const convertToEmbed = (url) => {
   let id = url.split("v=")[1];
   const ampersandPosition = id.indexOf("&");
@@ -12,13 +12,12 @@ function extractSrcFromEmbedCode(embedCode) {
     const iframe = doc.querySelector('iframe');
     return iframe ? iframe.src : '';
 }
-const Music = ({setMusicThumbnail, onCloseMusic}) => {
+const Music = ({setMusicThumbnail, isOpened, setIsOpened}) => {
   const [src, setSrc] = useState(
     "https://open.spotify.com/embed/playlist/37i9dQZF1DWWL9r8zcBUMO?utm_source=generator&theme=0"
   );
-
   const onSubmitLinkHandler = (e) => {
-    e.preventDefault(); // prevent the default form submission
+    e.preventDefault(); 
     let newLink = e.target.elements.link.value;
     if (newLink.startsWith("<iframe")) newLink = extractSrcFromEmbedCode(newLink);
     if (newLink.includes("youtube.com") && !newLink.includes("embed")) {
@@ -34,7 +33,7 @@ const Music = ({setMusicThumbnail, onCloseMusic}) => {
 };
 
   return (
-    <div className="absolute -top-[19rem] -left-1/3  h-72 w-80 bg-slate-800 rounded-lg py-2 px-4">
+    <div className={`absolute -top-[19rem] -left-1/3  h-72 w-80 bg-slate-800 rounded-lg py-2 px-4 ${isOpened ? "" : "hidden"}`}>
       <div className="flex justify-between items-center border-b border-slate-200 py-1">
         <p className="test-xs font-medium text-slate-300">Music</p>
         <svg
@@ -43,8 +42,8 @@ const Music = ({setMusicThumbnail, onCloseMusic}) => {
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          className="w-6 h-6 text-slate-300 rounded-full hover:bg-slate-600"
-          onClick={onCloseMusic}
+          className={`w-6 h-6 text-slate-300 rounded-full hover:bg-slate-600`}
+          onClick={() => setIsOpened(false)}
         >
           <path
             stroke-linecap="round"

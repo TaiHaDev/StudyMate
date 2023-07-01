@@ -18,12 +18,14 @@ const BottomBar = ({ onRemoveBackgroundHandler }) => {
   return (
     <div className="inline-flex space-x-4 rounded-full bg-slate-200 px-2 py-1 shadow-lg">
       <div className="hover:bg-slate-600  rounded-full">
-        {isMusicOpened && (
+      
           <Music
             setMusicThumbnail={setMusicThumbnail}
             onCloseMusic={closeMusicHandler}
+            isOpened={isMusicOpened}
+            setIsOpened={setIsMusicOpened}
           />
-        )}
+        
         <img
           src={musicThumbnail}
           alt="music thumbnail"
