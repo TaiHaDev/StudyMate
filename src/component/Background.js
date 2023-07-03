@@ -5,7 +5,7 @@ import city from "../asset/image/city.png";
 import coffee from "../asset/image/coffee.png";
 import animal from "../asset/image/animal.png";
 import favourite from "../asset/image/favourite.png";
-import { getRequest } from "../api/Request";
+import { deleteRequest, getRequest } from "../api/Request";
 
 const Background = ({
   onRemoveHandler,
@@ -18,9 +18,8 @@ const Background = ({
   const [selectedButton, setSelectedButton] = useState("animal");
   const [volume, setVolume] = useState(0);
   const [favouriteBackground, setFavouriteBackground] = useState();
-
+  
   const userId = 1; //TODO: update later
-
   useEffect(() => {
     const updateDisplayLink = async () => {
       if (!displayLink[selectedButton]) {
@@ -75,7 +74,7 @@ const Background = ({
   };
   const removeFavouriteBackground = () => {
     displayLink['favourite'].filter(bg => bg.id != videoUrl.id);
-
+    // deleteRequest("favouriteBackground/delete/" +)
 
 
 

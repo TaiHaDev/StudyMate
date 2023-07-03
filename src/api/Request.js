@@ -7,7 +7,7 @@ export const getRequest = async (endpoint) => {
     }
 }
 // DELETE request
-export const deleteRequest = async (url, endpoint, headers = {}) => {
+export const deleteRequest = async (endpoint, headers = {}) => {
     try {
         const response = await fetch(url + endpoint, {
             method: 'DELETE',
