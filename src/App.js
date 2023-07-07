@@ -16,6 +16,7 @@ import Background from "./component/Background";
 import Quote from "./component/Quote";
 import FlashCard from "./component/flashcard/FlashCard";
 import UserDropDown from "./component/UserDropDown";
+import { MyContextProvider } from "./context/MyContext";
 const expandOnClickHandler = (event) => {
   const root = document.getElementById("root");
   if (document.fullscreenElement) {
@@ -59,94 +60,103 @@ function App() {
   };
 
   return (
-    <div>
-      {videoLoading && (
-        <div className="absolute -z-10 top-0 left-0 h-full w-full bg-slate-700 flex items-center justify-center">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-200"></div>
+    <MyContextProvider>
+      <div>
+        {videoLoading && (
+          <div className="absolute -z-10 top-0 left-0 h-full w-full bg-slate-700 flex items-center justify-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-200"></div>
+          </div>
+        )}
+        <video
+          ref={videoRef}
+          onLoadedData={onVideoLoaded}
+          key={videoUrl.id}
+          autoPlay
+          loop
+          muted
+          className="absolute -z-10 top-0 left-0 h-full w-full object-cover"
+        >
+          <source src={videoUrl.url} type="video/mp4" />
+          This video is no longer exist
+        </video>
+        <div className="absolute bottom-5 right-5 opacity-80">
+          <Button iconSrc={chatBotIcon} description="Chatbot" isTop={true} />
         </div>
-      )}
-      <video
-        ref={videoRef}
-        onLoadedData={onVideoLoaded}
-        key={videoUrl.id}
-        autoPlay
-        loop
-        muted
-        className="absolute -z-10 top-0 left-0 h-full w-full object-cover"
-      >
-        <source src={videoUrl.url} type="video/mp4" />
-        This video is no longer exist
-      </video>
-      <div className="absolute bottom-5 right-5 opacity-80">
-        <Button iconSrc={chatBotIcon} description="Chatbot" isTop={true} />
-      </div>
-      <div className="absolute top-5 right-5 flex space-x-5 opacity-80">
-        <Button
-          iconSrc={quoteIcon}
-          description="Daily&nbsp;Quotes"
-          onClickHandler={() => onToggleHandler(quoteRef)}
-        />
+        <div className="absolute top-5 right-5 flex space-x-5 opacity-80">
+          <Button
+            iconSrc={quoteIcon}
+            description="Daily&nbsp;Quotes"
+            onClickHandler={() => onToggleHandler(quoteRef)}
+          />
 
-        <Button
-          iconSrc={flashCardIcon}
-          description="Flashcard"
-          onClickHandler={() => onSetStateHandler(setIsFlashcardloaded)}
-        />
-        <Button
-          iconSrc={todolistIcon}
-          description="Todo&nbsp;Lists"
-          onClickHandler={() => onToggleHandler(todoRef)}
-        />
-        <Button
-          iconSrc={timerIcon}
-          description="Timer"
-          onClickHandler={() => onToggleHandler(timerRef)}
-        />
-        <Button
-          iconSrc={expandIcon}
-          description="Expand"
-          onClickHandler={expandOnClickHandler}
-        />
+          <Button
+            iconSrc={flashCardIcon}
+            description="Flashcard"
+            onClickHandler={() => onSetStateHandler(setIsFlashcardloaded)}
+          />
+          <Button
+            iconSrc={todolistIcon}
+            description="Todo&nbsp;Lists"
+            onClickHandler={() => onToggleHandler(todoRef)}
+          />
+          <Button
+            iconSrc={timerIcon}
+            description="Timer"
+            onClickHandler={() => onToggleHandler(timerRef)}
+          />
+          <Button
+            iconSrc={expandIcon}
+            description="Expand"
+            onClickHandler={expandOnClickHandler}
+          />
 
-        <div className="relative ">
-        <Button  iconSrc={moreIcon} description="More" onClickHandler={() => onToggleHandler(dropDownRef)}/>
+          <div className="relative ">
+            <Button
+              iconSrc={moreIcon}
+              description="More"
+              onClickHandler={() => onToggleHandler(dropDownRef)}
+            />
 
-          <div ref={dropDownRef} className="absolute top-14 right-0 hidden" >
-            <UserDropDown/>
+            <div ref={dropDownRef} className="absolute top-14 right-0 hidden">
+              <UserDropDown />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 opacity-80">
-        <BottomBar
-          onRemoveBackgroundHandler={() => onToggleHandler(backgroundRef)}
-        />
-      </div>
-      <div ref={timerRef} className="opacity-80 absolute top-24 right-5 -z-10"  >
-        <PomodoroTimer onRemoveHandler={() => onToggleHandler(timerRef)} />
-      </div>
-      <div ref={todoRef} className="opacity-80">
-        <TodoList onRemoveHandler={() => onToggleHandler(todoRef)} />
-      </div>
-      <div ref={backgroundRef} className="opacity-80 absolute">
-        <Background
-          videoUrl={videoUrl}
-          videoRef={videoRef}
-          onRemoveHandler={() => onToggleHandler(backgroundRef)}
-          changeVideoUrl={changeVideoHandler}
-          resetVideoLoading={setVideoLoading}
-        />
-      </div>
-      <div ref={quoteRef} className="absolute top-[39rem] right-5 opacity-80">
-        <Quote onRemoveHandler={() => onToggleHandler(quoteRef)} />
-      </div>
-      {isFlashcardLoaded && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-80">
-          <FlashCard
-            onRemoveHandler={() => onSetStateHandler(setIsFlashcardloaded)}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 opacity-80">
+          <BottomBar
+            onRemoveBackgroundHandler={() => onToggleHandler(backgroundRef)}
           />
         </div>
-      )}
-    </div>
+        <div
+          ref={timerRef}
+          className="opacity-80 absolute top-24 right-5 -z-10"
+        >
+          <PomodoroTimer onRemoveHandler={() => onToggleHandler(timerRef)} />
+        </div>
+        <div ref={todoRef} className="opacity-80">
+          <TodoList onRemoveHandler={() => onToggleHandler(todoRef)} />
+        </div>
+        <div ref={backgroundRef} className="opacity-80 absolute">
+          <Background
+            videoUrl={videoUrl}
+            videoRef={videoRef}
+            onRemoveHandler={() => onToggleHandler(backgroundRef)}
+            changeVideoUrl={changeVideoHandler}
+            resetVideoLoading={setVideoLoading}
+          />
+        </div>
+        <div ref={quoteRef} className="absolute top-[39rem] right-5 opacity-80">
+          <Quote onRemoveHandler={() => onToggleHandler(quoteRef)} />
+        </div>
+        {isFlashcardLoaded && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-80">
+            <FlashCard
+              onRemoveHandler={() => onSetStateHandler(setIsFlashcardloaded)}
+            />
+          </div>
+        )}
+      </div>
+    </MyContextProvider>
   );
 }
 

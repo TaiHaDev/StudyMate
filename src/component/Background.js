@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import nature from "../asset/image/nature.png";
 import anime from "../asset/image/anime.png";
 import city from "../asset/image/city.png";
@@ -6,6 +6,7 @@ import coffee from "../asset/image/coffee.png";
 import animal from "../asset/image/animal.png";
 import favourite from "../asset/image/favourite.png";
 import { deleteRequest, getRequest } from "../api/Request";
+import {MyContext} from "../context/MyContext";
 
 const Background = ({
   onRemoveHandler,
@@ -18,8 +19,7 @@ const Background = ({
   const [selectedButton, setSelectedButton] = useState("animal");
   const [volume, setVolume] = useState(0);
   const [favouriteBackground, setFavouriteBackground] = useState();
-  
-  const userId = 1; //TODO: update later
+  const {credential, openModal} = useContext(MyContext);
   useEffect(() => {
     const updateDisplayLink = async () => {
       if (!displayLink[selectedButton]) {
@@ -37,9 +37,9 @@ const Background = ({
 
   useEffect(() => {
     const updateFavouriteBackground = async () => {
-      if (!favouriteBackground) {
+      if (!favouriteBackground && credential.id) {
         let favouriteBackgroundList = await getRequest(
-          "favouriteBackground/" + userId
+          "favouriteBackground/" + credential.id
         );
         favouriteBackgroundList = favouriteBackgroundList.map((fb) => ({
           ...fb.background,
@@ -75,17 +75,13 @@ const Background = ({
   const removeFavouriteBackground = () => {
     displayLink['favourite'].filter(bg => bg.id != videoUrl.id);
     // deleteRequest("favouriteBackground/delete/" +)
+  }
+  const addFavouriteBackground = () => {
+    if (credential) {
 
-
-
-
-
-
-
-
-
-
-  
+    } else {
+      openModal();
+    }
   }
 
 
@@ -236,6 +232,7 @@ const Background = ({
                 stroke-width="1.5"
                 stroke="currentColor"
                 class="w-8 h-8 p-1.5 bg-slate-200 text-slate-800 rounded-lg "
+                onClick={addFavouriteBackground}
               >
                 <path
                   stroke-linecap="round"
