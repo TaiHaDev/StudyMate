@@ -5,7 +5,7 @@ const MyContext = createContext();
 
 const MyContextProvider = ({ children }) => {
   const [credential, setCredential] = useState(
-    localStorage.getItem("credential")
+    JSON.parse(localStorage.getItem("credential"))
   );
 
   const updateCredential = (newMessage) => {

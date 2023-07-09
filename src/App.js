@@ -17,6 +17,11 @@ import Quote from "./component/Quote";
 import FlashCard from "./component/flashcard/FlashCard";
 import UserDropDown from "./component/UserDropDown";
 import { MyContextProvider } from "./context/MyContext";
+import Chatbot from "react-chatbot-kit";
+import config from "./component/chatbot/config";
+import ActionProvider from "./component/chatbot/actionProvider";
+import MessageParser from "./component/chatbot/messageParser";
+import "react-chatbot-kit/build/main.css";
 const expandOnClickHandler = (event) => {
   const root = document.getElementById("root");
   if (document.fullscreenElement) {
@@ -41,6 +46,7 @@ function App() {
   const videoRef = useRef();
   const backgroundRef = useRef();
   const dropDownRef = useRef();
+  const dialogRef = useRef();
   const [isFlashcardLoaded, setIsFlashcardloaded] = useState(false);
   const onToggleHandler = (ref) => {
     if (ref.current.classList.contains("hidden")) {
@@ -79,9 +85,7 @@ function App() {
           <source src={videoUrl.url} type="video/mp4" />
           This video is no longer exist
         </video>
-        <div className="absolute bottom-5 right-5 opacity-80">
-          <Button iconSrc={chatBotIcon} description="Chatbot" isTop={true} />
-        </div>
+
         <div className="absolute top-5 right-5 flex space-x-5 opacity-80">
           <Button
             iconSrc={quoteIcon}
@@ -133,10 +137,10 @@ function App() {
         >
           <PomodoroTimer onRemoveHandler={() => onToggleHandler(timerRef)} />
         </div>
-        <div ref={todoRef} className="opacity-80">
+        <div ref={todoRef} className="absolute right-5 top-72 opacity-80 ">
           <TodoList onRemoveHandler={() => onToggleHandler(todoRef)} />
         </div>
-        <div ref={backgroundRef} className="opacity-80 absolute">
+        <div ref={backgroundRef} className="opacity-80 absolute ">
           <Background
             videoUrl={videoUrl}
             videoRef={videoRef}
@@ -145,7 +149,10 @@ function App() {
             resetVideoLoading={setVideoLoading}
           />
         </div>
-        <div ref={quoteRef} className="absolute top-[39rem] right-5 opacity-80">
+        <div
+          ref={quoteRef}
+          className="absolute top-[39rem] right-5 opacity-80 "
+        >
           <Quote onRemoveHandler={() => onToggleHandler(quoteRef)} />
         </div>
         {isFlashcardLoaded && (
@@ -155,6 +162,20 @@ function App() {
             />
           </div>
         )}
+        <div className="absolute bottom-5 right-5">
+          <div className="opacity-80" onClick={() => onToggleHandler(dialogRef)}>
+            <Button iconSrc={chatBotIcon} description="Chatbot" isTop={true} />
+          </div>
+          <div className="absolute -top-[32rem] right-0 z-50 ">
+            <div ref={dialogRef} className="hidden">
+              <Chatbot
+                config={config}
+                actionProvider={ActionProvider}
+                messageParser={MessageParser}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </MyContextProvider>
   );

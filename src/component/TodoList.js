@@ -56,7 +56,7 @@ const TodoList = ({ onRemoveHandler }) => {
     }
   };
   return (
-    <div className="w-[24.25rem] h-80 bg-slate-200 rounded-lg px-5 py-2 resize-y overflow-auto absolute right-5 top-72 flex flex-col">
+    <div className="w-[24.25rem] h-80 bg-slate-200 rounded-lg px-5 py-2 resize-y overflow-auto  flex flex-col">
       <div className="flex justify-between items-center border-b-2 border-slate-800">
         <p className="font-medium">Tasks</p>
 

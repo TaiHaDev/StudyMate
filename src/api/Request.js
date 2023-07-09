@@ -7,13 +7,13 @@ export const getRequest = async (endpoint) => {
   }
 };
 // DELETE request
-export const deleteRequest = async (endpoint, headers = {}) => {
+export const deleteRequest = async (endpoint) => {
   try {
     const response = await fetch(url + endpoint, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        ...headers,
+        "Authorization": localStorage.getItem("jwt")
       },
     });
 
@@ -30,14 +30,13 @@ export const deleteRequest = async (endpoint, headers = {}) => {
   }
 };
 
-// POST request
-export const postRequest = async (url, endpoint, body = {}, headers = {}) => {
+export const postRequest = async (endpoint, body = {}) => {
   try {
     const response = await fetch(url + endpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...headers,
+        "Authorization": localStorage.getItem("jwt")
       },
       body: JSON.stringify(body),
     });
@@ -68,10 +67,11 @@ export async function fetchWithBasicAuth(username, password) {
     const data = await response.json();
     console.log(data, data.email, data.authorities);
     let authHeader = response.headers.get("Authorization");
-    localStorage.setItem("credential", {
-      email: data.email,
-      authorities: data.authorities,
-    });
+    localStorage.setItem("credential", JSON.stringify({
+        id: data.id,
+        email: data.email,
+        authorities: data.authorities,
+      }));
     localStorage.setItem("jwt", authHeader);
   } catch (error) {
     console.error("Error:", error);
@@ -79,6 +79,7 @@ export async function fetchWithBasicAuth(username, password) {
 }
 
 export const validateGoogleJWT = async jwt => {
+    console.log(jwt);
     let headers = new Headers();
     headers.set("google", jwt);
     try {
@@ -90,10 +91,11 @@ export const validateGoogleJWT = async jwt => {
         const data = await response.json();
         console.log(data, data.email, data.authorities);
         let authHeader = response.headers.get("Authorization");
-        localStorage.setItem("credential", {
+        localStorage.setItem("credential", JSON.stringify({
+          id: data.id,
           email: data.email,
           authorities: data.authorities,
-        });
+        }));
         localStorage.setItem("jwt", authHeader);
       } catch (error) {
         console.error("Error:", error);
