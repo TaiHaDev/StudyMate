@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 const addChosenType = (event) => {
-  event.target.classList.add("bg-slate-800", "text-slate-200");
+  event.target.classList.add("bg-slate-800", "text-slate-200", "dark:bg-slate-200", "dark:text-slate-800");
 }
 const convertTime = time => {
   let minute = time / 60;
@@ -78,8 +78,8 @@ const PomodoroTimer = ({onRemoveHandler}) => {
   const onClickStudyType = event => {
     if (chosenType[0] === studyTime) return;
     else {
-      shortBreakRef.current.classList.remove("bg-slate-800", "text-slate-200");
-      longBreakRef.current.classList.remove("bg-slate-800", "text-slate-200");
+      shortBreakRef.current.classList.remove("bg-slate-800", "text-slate-200", "dark:bg-slate-200", "dark:text-slate-800");
+      longBreakRef.current.classList.remove("bg-slate-800", "text-slate-200", "dark:bg-slate-200", "dark:text-slate-800");
     }
     setChosenType([studyTime, setStudyTime]);
     addChosenType(event);
@@ -89,8 +89,8 @@ const PomodoroTimer = ({onRemoveHandler}) => {
   const onClickShortBreakType = event => {
     if (chosenType[0] === shortBreakTime) return;
     else {
-      studyRef.current.classList.remove("bg-slate-800", "text-slate-200");
-      longBreakRef.current.classList.remove("bg-slate-800", "text-slate-200");
+      studyRef.current.classList.remove("bg-slate-800", "text-slate-200", "dark:bg-slate-200", "dark:text-slate-800");
+      longBreakRef.current.classList.remove("bg-slate-800", "text-slate-200", "dark:bg-slate-200", "dark:text-slate-800");
     }
     setChosenType([shortBreakTime, setShortBreakTime]);
     addChosenType(event);
@@ -101,8 +101,8 @@ const PomodoroTimer = ({onRemoveHandler}) => {
   const onClickLongBreakType = event => {
     if (chosenType[0] === longBreakTime) return;
     else {
-      studyRef.current.classList.remove("bg-slate-800", "text-slate-200");
-      shortBreakRef.current.classList.remove("bg-slate-800", "text-slate-200");
+      studyRef.current.classList.remove("bg-slate-800", "text-slate-200", "dark:bg-slate-200", "dark:text-slate-800");
+      shortBreakRef.current.classList.remove("bg-slate-800", "text-slate-200", "dark:bg-slate-200", "dark:text-slate-800");
     }
     setChosenType([longBreakTime, setLongBreakTime]);
     addChosenType(event);
@@ -121,7 +121,7 @@ const PomodoroTimer = ({onRemoveHandler}) => {
   }
   const [initialMin, initialSecond] = convertTime(chosenType[0]);
   return (
-    <div className="bg-slate-200 h-40 w-[24.25rem] rounded-lg px-5 py-2 flex flex-col justify-between ">
+    <div className="bg-slate-200 dark:bg-slate-800 dark:text-white h-40 w-[24.25rem] rounded-lg px-5 py-2 flex flex-col justify-between ">
         <div className='flex justify-between items-center border-b-2 border-slate-700 pb-1'>
         <p className='font-medium'>Sounds</p>
         <div className='flex space-x-2'>
@@ -138,7 +138,7 @@ const PomodoroTimer = ({onRemoveHandler}) => {
 
         </div>
         <div className='flex justify-between'>
-            <button onClick={onClickStudyType} ref={studyRef} className='font-medium border border-slate-800 rounded-md py-1 px-2 bg-slate-800 text-slate-200 '> Work/Study</button>
+            <button onClick={onClickStudyType} ref={studyRef} className='font-medium border border-slate-800 rounded-md py-1 px-2 bg-slate-800 text-slate-200 dark:bg-slate-200 dark:text-slate-800'> Work/Study</button>
             <button onClick={onClickShortBreakType} ref={shortBreakRef} className='font-medium border border-slate-800 rounded-md py-1 px-2 '>Short Break</button>
             <button onClick={onClickLongBreakType} ref={longBreakRef} className='font-medium border border-slate-800 rounded-md py-1 px-2 '>Long Break</button>
         </div>
@@ -148,7 +148,7 @@ const PomodoroTimer = ({onRemoveHandler}) => {
               <span className='text-5xl'>:</span>
               <input onChange={onChangeTimeInputHandler} ref={secondRef} type="text" className="font-bold bg-transparent text-5xl w-16 overflow-hidden rounded-md outline-none" onInput={onSecondInputHandler} defaultValue={initialSecond}/>       
             </div>
-            <button ref={startButtonRef} onClick={pauseTimer} className='text-xl font-medium bg-slate-800 text-slate-200 py-2 px-6 rounded-lg hover:bg-slate-200 hover:text-slate-800 hover:border hover:border-slate-800'>Start</button>
+            <button ref={startButtonRef} onClick={pauseTimer} className='text-xl font-medium bg-slate-800 dark:bg-slate-200 text-slate-200 dark:text-slate-800 py-2 px-6 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200 hover:border hover:border-slate-800 '>Start</button>
         </div>
 
     </div>  

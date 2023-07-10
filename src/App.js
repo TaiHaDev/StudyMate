@@ -1,4 +1,3 @@
-import video from "./asset/video/library_study1.mp4";
 import chatBotIcon from "./asset/image/chatbot.png";
 import Button from "./component/Button";
 import timerIcon from "./asset/image/chronometer.png";
@@ -6,11 +5,10 @@ import expandIcon from "./asset/image/expand.png";
 import flashCardIcon from "./asset/image/flash-cards.png";
 import todolistIcon from "./asset/image/to-do-list.png";
 import moreIcon from "./asset/image/more.png";
-import backgroundIcon from "./asset/image/background.png";
 import quoteIcon from "./asset/image/quote.png";
 import PomodoroTimer from "./component/PomodoroTimer";
 import TodoList from "./component/TodoList";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import BottomBar from "./component/BottomBar";
 import Background from "./component/Background";
 import Quote from "./component/Quote";
@@ -31,6 +29,7 @@ const expandOnClickHandler = (event) => {
   }
 };
 
+
 function App() {
   const [videoLoading, setVideoLoading] = useState(true);
   const [videoUrl, setVideoUrl] = useState({
@@ -39,7 +38,6 @@ function App() {
     name: "cat sleeping",
     theme: "animal",
   });
-  const { isTimerClicked, setIsTimerClicked } = useState(true);
   const timerRef = useRef();
   const todoRef = useRef();
   const quoteRef = useRef();

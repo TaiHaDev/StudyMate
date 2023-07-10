@@ -46,14 +46,14 @@ const Quote = ({onRemoveHandler}) => {
     const randomQuoteNumber = Math.floor(Math.random() * motivationalQuotes.length);
     const [quote, setQuote] = useState(motivationalQuotes[randomQuoteNumber]);
   return (
-    <div className='w-[24.25rem]'>
-        <div className='flex justify-between items-center my-2'>
+    <div className='w-[24.25rem] '>
+        <div className='flex justify-between items-center my-2 '>
             <div className='flex space-x-1'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-600">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
             </svg>
-            <p className='text-white font-medium'>Motivational Quote</p>
+            <p className='text-white font-medium dark:text-black'>Motivational Quote</p>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white hover:bg-slate-800 rounded-full" onClick={() => onRemoveHandler()}>
   <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
@@ -61,8 +61,8 @@ const Quote = ({onRemoveHandler}) => {
 
 
         </div>
-        <p className='text-white text-lg font-medium'>"{quote.quote}"</p>
-        <p className='text-white text-end'>{quote.author}</p>
+        <p className='text-white text-lg font-medium dark:text-black'>"{quote.quote}"</p>
+        <p className='text-white text-end dark:text-black'>{quote.author}</p>
 
     </div>
   )

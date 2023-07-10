@@ -16,7 +16,7 @@ const BottomBar = ({ onRemoveBackgroundHandler }) => {
   };
 
   return (
-    <div className="inline-flex space-x-4 rounded-full bg-slate-200 px-2 py-1 shadow-lg">
+    <div className="inline-flex space-x-4 rounded-full bg-slate-200 dark:bg-slate-800 dark:text-white px-2 py-1 shadow-lg">
       <div className="hover:bg-slate-600  rounded-full">
                     <Music
             setMusicThumbnail={setMusicThumbnail}
@@ -69,7 +69,7 @@ const BottomBar = ({ onRemoveBackgroundHandler }) => {
           />
         </svg>
       </div>
-      <div className="border-r border-slate-800"></div>
+      <div className="border-r border-slate-800 dark:border-slate-200"></div>
       <div className="hover:bg-slate-600 px-2 py-1 rounded-full">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -107,7 +107,7 @@ const Background = ({
 
 
   return (
-    <div className="w-80 h-[calc(100vh-4vh)] m-[2vh] bg-slate-200 rounded-md py-2 px-4 flex flex-col justify-between">
+    <div className="w-80 h-[calc(100vh-4vh)] m-[2vh] bg-slate-200 dark:bg-slate-800 dark:text-white rounded-md py-2 px-4 flex flex-col justify-between">
       <div>
         <div className="flex justify-between items-center border-b border-slate-800 pb-1 font-medium text-lg">
           <p>Study Spaces</p>
@@ -228,7 +228,7 @@ const Background = ({
       </div>
       {/* favourite background */}
 
-      <div className="w-full  rounded-md pt-3 pb-4 px-4 my-4 text-slate-800 flex flex-col space-y-2">
+      <div className="w-full  rounded-md pt-3 pb-4 px-4 my-4 text-slate-800 dark:text-white flex flex-col space-y-2">
         <div className="flex justify-between items-center">
           <p className="font-medium">{videoUrl.name}</p>
           <div className="flex space-x-2 items-center">
@@ -253,7 +253,7 @@ const Background = ({
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="w-8 h-8 p-1.5 bg-slate-200 text-slate-800 rounded-lg "
+                  class="w-6 h-6 "
               
                 >
                   <path
@@ -271,7 +271,7 @@ const Background = ({
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-8 h-8 p-1.5 bg-slate-200 text-slate-800 rounded-lg "
+              class="w-6 h-6 "
             >
               <path
                 stroke-linecap="round"
